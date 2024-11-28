@@ -1,0 +1,59 @@
+name: crem-journal
+version: 0.0.1
+author: Marco Perone
+maintainer: pasafama@gmail.com
+copyright:  2024 Marco Perone
+license: Hippocratic
+category: Machines, State Machines, Journal, Time tracking
+synopsis: Activity and time tracking, based on event sourcing and crem
+homepage: https://github.com/marcosh/crem-journal
+bug-reports: https://github.com/marcosh/crem-journal
+description: Little silly application to track daily activities implemented with composable state machines
+tested-with:
+extra-source-files:
+  - README.md
+  - CHANGELOG.md
+language: GHC2021
+default-extensions:
+  - DerivingStrategies # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/deriving_strategies.html#extension-DerivingStrategies
+  - LambdaCase         # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/lambda_case.html#extension-LambdaCase
+  - PackageImports     # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/package_qualified_imports.html#extension-PackageImports
+ghc-options:
+  # Turn every warning into an error
+  - -Werror                        # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Werror
+  # Enable every warning GHC supports
+  - -Weverything                   # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Weverything
+
+  # Turn off the warnings we don't care about.
+  - -Wno-safe                      # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/safe_haskell.html#ghc-flag--Wsafe
+  - -Wno-unsafe                    # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/safe_haskell.html#ghc-flag--Wunsafe
+  - -Wno-missing-safe-haskell-mode # https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/safe_haskell.html#ghc-flag--Wmissing-safe-haskell-mode
+  - -Wno-implicit-prelude          # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wimplicit-prelude
+  - -Wno-missing-export-lists      # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wmissing-export-lists
+  - -Wno-missing-home-modules      # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wmissing-home-modules
+  - -Wno-missing-import-lists      # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wmissing-import-lists
+  - -Wno-all-missed-specialisations    # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wall-missed-specialisations
+  - -Wno-prepositive-qualified-module  # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wprepositive-qualified-module
+dependencies:
+  - base >= 4.15 && < 4.21
+
+library:
+  source-dirs: src
+  dependencies:
+    - crem
+
+tests:
+  crem-journal-spec:
+    main: Spec.hs
+    source-dirs: spec
+    dependencies:
+      - crem-journal
+      - hspec >= 2.7 && < 2.12
+    build-tools: hspec-discover:hspec-discover
+
+executables:
+  crem-journal-exe:
+    source-dirs: app
+    main: Main.hs
+    dependencies:
+      - crem-journal
