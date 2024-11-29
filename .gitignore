@@ -1,0 +1,7 @@
+# cabal
+dist
+dist-*
+.ghc.*
+
+# nix
+result

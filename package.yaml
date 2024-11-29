@@ -3,13 +3,14 @@ version: 0.0.1
 author: Marco Perone
 maintainer: pasafama@gmail.com
 copyright:  2024 Marco Perone
-license: Hippocratic
+license: OtherLicense
 category: Machines, State Machines, Journal, Time tracking
 synopsis: Activity and time tracking, based on event sourcing and crem
 homepage: https://github.com/marcosh/crem-journal
 bug-reports: https://github.com/marcosh/crem-journal
 description: Little silly application to track daily activities implemented with composable state machines
 tested-with:
+  - GHC ==9.6.5
 extra-source-files:
   - README.md
   - CHANGELOG.md
@@ -39,15 +40,15 @@ dependencies:
 
 library:
   source-dirs: src
-  dependencies:
-    - crem
+  # dependencies:
+  #   - crem
 
 tests:
   crem-journal-spec:
     main: Spec.hs
     source-dirs: spec
     dependencies:
-      - crem-journal
+      # - crem-journal
       - hspec >= 2.7 && < 2.12
     build-tools: hspec-discover:hspec-discover
 
@@ -55,5 +56,5 @@ executables:
   crem-journal-exe:
     source-dirs: app
     main: Main.hs
-    dependencies:
-      - crem-journal
+    # dependencies:
+    #   - crem-journal

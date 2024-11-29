@@ -1,0 +1,74 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.1.
+--
+-- see: https://github.com/sol/hpack
+
+name:           crem-journal
+version:        0.0.1
+synopsis:       Activity and time tracking, based on event sourcing and crem
+description:    Little silly application to track daily activities implemented with composable state machines
+category:       Machines, State Machines, Journal, Time tracking
+homepage:       https://github.com/marcosh/crem-journal
+bug-reports:    https://github.com/marcosh/crem-journal
+author:         Marco Perone
+maintainer:     pasafama@gmail.com
+copyright:      2024 Marco Perone
+license:        OtherLicense
+license-file:   LICENSE
+build-type:     Simple
+tested-with:
+    GHC ==9.6.5
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+library
+  exposed-modules:
+      Foo
+  other-modules:
+      Paths_crem_journal
+  hs-source-dirs:
+      src
+  default-extensions:
+      DerivingStrategies
+      LambdaCase
+      PackageImports
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  build-depends:
+      base >=4.15 && <4.21
+  default-language: GHC2021
+
+executable crem-journal-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_crem_journal
+  hs-source-dirs:
+      app
+  default-extensions:
+      DerivingStrategies
+      LambdaCase
+      PackageImports
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  build-depends:
+      base >=4.15 && <4.21
+  default-language: GHC2021
+
+test-suite crem-journal-spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_crem_journal
+  hs-source-dirs:
+      spec
+  default-extensions:
+      DerivingStrategies
+      LambdaCase
+      PackageImports
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  build-tool-depends:
+      hspec-discover:hspec-discover
+  build-depends:
+      base >=4.15 && <4.21
+    , hspec >=2.7 && <2.12
+  default-language: GHC2021
