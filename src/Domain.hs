@@ -1,9 +1,8 @@
 module Domain where
 
-import "text" Data.Text (Text)
 import "time" Data.Time (UTCTime)
 
-newtype JournalEntryContent = JournalEntryContent Text
+import Domain.JournalEntryContent (JournalEntryContent)
 
 newtype JournalEntryCreatedAt = JournalEntryCreatedAt UTCTime
 

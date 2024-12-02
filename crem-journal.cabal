@@ -26,6 +26,7 @@ extra-source-files:
 library
   exposed-modules:
       Domain
+      Domain.JournalEntryContent
   other-modules:
       Paths_crem_journal
   hs-source-dirs:
