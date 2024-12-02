@@ -35,13 +35,16 @@ ghc-options:
   - -Wno-missing-import-lists      # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wmissing-import-lists
   - -Wno-all-missed-specialisations    # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wall-missed-specialisations
   - -Wno-prepositive-qualified-module  # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wprepositive-qualified-module
+  - -Wno-missing-kind-signatures   # https://downloads.haskell.org/ghc/latest/docs/users_guide/using-warnings.html#ghc-flag--Wmissing-kind-signatures
 dependencies:
   - base >= 4.15 && < 4.21
 
 library:
   source-dirs: src
-  # dependencies:
+  dependencies:
   #   - crem
+    - text
+    - time
 
 tests:
   crem-journal-spec:

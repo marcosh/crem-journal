@@ -25,7 +25,7 @@ extra-source-files:
 
 library
   exposed-modules:
-      Foo
+      Domain
   other-modules:
       Paths_crem_journal
   hs-source-dirs:
@@ -34,9 +34,11 @@ library
       DerivingStrategies
       LambdaCase
       PackageImports
-  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
   build-depends:
       base >=4.15 && <4.21
+    , text
+    , time
   default-language: GHC2021
 
 executable crem-journal-exe
@@ -49,7 +51,7 @@ executable crem-journal-exe
       DerivingStrategies
       LambdaCase
       PackageImports
-  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
   build-depends:
       base >=4.15 && <4.21
   default-language: GHC2021
@@ -65,7 +67,7 @@ test-suite crem-journal-spec
       DerivingStrategies
       LambdaCase
       PackageImports
-  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module
+  ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
   build-tool-depends:
       hspec-discover:hspec-discover
   build-depends:
