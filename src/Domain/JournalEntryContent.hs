@@ -1,7 +1,7 @@
 module Domain.JournalEntryContent (JournalEntryContent, journalEntryContent) where
 
-import "base" Prelude hiding (null)
 import "text" Data.Text (Text, null, strip)
+import "base" Prelude hiding (null)
 
 -- | The content of a journal entry. Should be a non-empty string after trimming
 newtype JournalEntryContent = JournalEntryContent Text
