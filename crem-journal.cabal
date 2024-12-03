@@ -25,8 +25,11 @@ extra-source-files:
 
 library
   exposed-modules:
-      Domain
+      Domain.JournalAggregate
+      Domain.JournalCommand
       Domain.JournalEntryContent
+      Domain.JournalEntryCreatedAt
+      Domain.JournalEvent
   other-modules:
       Paths_crem_journal
   hs-source-dirs:
@@ -38,6 +41,8 @@ library
   ghc-options: -Werror -Weverything -Wno-safe -Wno-unsafe -Wno-missing-safe-haskell-mode -Wno-implicit-prelude -Wno-missing-export-lists -Wno-missing-home-modules -Wno-missing-import-lists -Wno-all-missed-specialisations -Wno-prepositive-qualified-module -Wno-missing-kind-signatures
   build-depends:
       base >=4.15 && <4.21
+    , crem
+    , monad-time
     , text
     , time
   default-language: GHC2021

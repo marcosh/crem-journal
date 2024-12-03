@@ -42,7 +42,8 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
-  #   - crem
+    - crem
+    - monad-time
     - text
     - time
 
