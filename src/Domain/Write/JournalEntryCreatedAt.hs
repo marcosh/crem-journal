@@ -1,4 +1,4 @@
-module Domain.JournalEntryCreatedAt where
+module Domain.Write.JournalEntryCreatedAt where
 
 import "monad-time" Control.Monad.Time (MonadTime (..))
 import "time" Data.Time (UTCTime)

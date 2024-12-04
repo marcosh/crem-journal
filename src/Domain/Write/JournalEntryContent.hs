@@ -1,4 +1,4 @@
-module Domain.JournalEntryContent (JournalEntryContent, journalEntryContent) where
+module Domain.Write.JournalEntryContent (JournalEntryContent, journalEntryContent) where
 
 import "text" Data.Text (Text, null, strip)
 import "base" Prelude hiding (null)

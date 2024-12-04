@@ -1,13 +1,14 @@
 {-# LANGUAGE DataKinds #-}
 
-module Domain.JournalAggregate where
+module Domain.Write.JournalAggregate where
 
 import "crem" Crem.BaseMachine (BaseMachineT, statelessBaseT)
 import "crem" Crem.Topology (TrivialTopology)
+import "monad-time" Control.Monad.Time (MonadTime)
 
-import Domain.JournalCommand (JournalCommand (..))
-import Domain.JournalEntryCreatedAt (journalCreatedNow)
-import Domain.JournalEvent (JournalEvent (..))
+import Domain.Write.JournalCommand (JournalCommand (..))
+import Domain.Write.JournalEntryCreatedAt (journalCreatedNow)
+import Domain.Write.JournalEvent (JournalEvent (..))
 
 aggregate :: (MonadTime m) => BaseMachineT m (TrivialTopology @()) JournalCommand JournalEvent
 aggregate = statelessBaseT $ \(RecordJournalEntry content) -> do

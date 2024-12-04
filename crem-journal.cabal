@@ -25,11 +25,11 @@ extra-source-files:
 
 library
   exposed-modules:
-      Domain.JournalAggregate
-      Domain.JournalCommand
-      Domain.JournalEntryContent
-      Domain.JournalEntryCreatedAt
-      Domain.JournalEvent
+      Domain.Write.JournalAggregate
+      Domain.Write.JournalCommand
+      Domain.Write.JournalEntryContent
+      Domain.Write.JournalEntryCreatedAt
+      Domain.Write.JournalEvent
   other-modules:
       Paths_crem_journal
   hs-source-dirs:
