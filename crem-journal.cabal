@@ -25,6 +25,8 @@ extra-source-files:
 
 library
   exposed-modules:
+      Domain.Read.JournalProjection
+      Domain.Read.JournalRepository
       Domain.Write.JournalAggregate
       Domain.Write.JournalCommand
       Domain.Write.JournalEntryContent
