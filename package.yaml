@@ -42,6 +42,8 @@ dependencies:
 library:
   source-dirs: src
   dependencies:
+    - bytestring
+    - cassava
     - crem
     - monad-time
     - text
