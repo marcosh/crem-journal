@@ -54,8 +54,11 @@ tests:
     main: Spec.hs
     source-dirs: spec
     dependencies:
-      # - crem-journal
+      - crem
+      - crem-journal
+      - hedgehog
       - hspec >= 2.7 && < 2.12
+      - hspec-hedgehog
     build-tools: hspec-discover:hspec-discover
 
 executables:

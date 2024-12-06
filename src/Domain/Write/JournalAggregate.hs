@@ -11,6 +11,5 @@ import Domain.Write.JournalEntryCreatedAt (journalCreatedNow)
 import Domain.Write.JournalEvent (JournalEvent (..))
 
 aggregate :: (MonadTime m) => BaseMachineT m (TrivialTopology @()) JournalCommand JournalEvent
-aggregate = statelessBaseT $ \(RecordJournalEntry content) -> do
-  entryCreatedAt <- journalCreatedNow
-  pure $ JournalEntryRecorded content entryCreatedAt
+aggregate = statelessBaseT $ \(RecordJournalEntry content) ->
+  JournalEntryRecorded content <$> journalCreatedNow

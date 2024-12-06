@@ -71,6 +71,8 @@ test-suite crem-journal-spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Domain.Write.JournalAggregateSpec
+      Gen.JournalEntryContent
       Paths_crem_journal
   hs-source-dirs:
       spec
@@ -83,5 +85,9 @@ test-suite crem-journal-spec
       hspec-discover:hspec-discover
   build-depends:
       base >=4.15 && <4.21
+    , crem
+    , crem-journal
+    , hedgehog
     , hspec >=2.7 && <2.12
+    , hspec-hedgehog
   default-language: GHC2021

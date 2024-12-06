@@ -5,6 +5,8 @@ import "base" Prelude hiding (null)
 
 -- | The content of a journal entry. Should be a non-empty string after trimming
 newtype JournalEntryContent = JournalEntryContent Text
+  deriving stock (Show)
+  deriving newtype (Eq)
 
 -- | Ways in which a text can fail to become a journal entry content
 data JournalEntryContentError
