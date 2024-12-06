@@ -1,4 +1,8 @@
-module Domain.Write.JournalEntryContent (JournalEntryContent, journalEntryContent) where
+module Domain.Write.JournalEntryContent
+  ( JournalEntryContent
+  , JournalEntryContentError (..)
+  , journalEntryContent
+  ) where
 
 import "text" Data.Text (Text, null, strip)
 import "base" Prelude hiding (null)
@@ -11,6 +15,7 @@ newtype JournalEntryContent = JournalEntryContent Text
 -- | Ways in which a text can fail to become a journal entry content
 data JournalEntryContentError
   = EmptyAfterTrimming
+  deriving stock (Eq, Show)
 
 -- | Try to create a @JournalEntryContent from a @Text
 -- If could fail with a @JournalEntryContentError

@@ -59,6 +59,7 @@ tests:
       - hedgehog
       - hspec >= 2.7 && < 2.12
       - hspec-hedgehog
+      - text
     build-tools: hspec-discover:hspec-discover
 
 executables:

@@ -72,6 +72,7 @@ test-suite crem-journal-spec
   main-is: Spec.hs
   other-modules:
       Domain.Write.JournalAggregateSpec
+      Domain.Write.JournalEntryContentSpec
       Gen.JournalEntryContent
       Paths_crem_journal
   hs-source-dirs:
@@ -90,4 +91,5 @@ test-suite crem-journal-spec
     , hedgehog
     , hspec >=2.7 && <2.12
     , hspec-hedgehog
+    , text
   default-language: GHC2021
