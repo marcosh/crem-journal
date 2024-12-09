@@ -8,7 +8,8 @@ import "time" Data.Time (UTCTime)
 import "time" Data.Time.Format.ISO8601 (iso8601ParseM, iso8601Show)
 
 newtype CsvTime = CsvTime UTCTime
-  deriving newtype (Show)
+  deriving stock (Show)
+  deriving newtype (Eq)
 
 instance FromField CsvTime where
   parseField :: Field -> Parser CsvTime

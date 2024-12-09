@@ -74,6 +74,8 @@ test-suite crem-journal-spec
       Domain.Write.JournalAggregateSpec
       Domain.Write.JournalEntryContentSpec
       Gen.JournalEntryContent
+      Gen.UTCTime
+      Infrastructure.Read.CsvFileJournalRepositorySpec
       Paths_crem_journal
   hs-source-dirs:
       spec
@@ -86,10 +88,12 @@ test-suite crem-journal-spec
       hspec-discover:hspec-discover
   build-depends:
       base >=4.15 && <4.21
+    , cassava
     , crem
     , crem-journal
     , hedgehog
     , hspec >=2.7 && <2.12
     , hspec-hedgehog
     , text
+    , time
   default-language: GHC2021
