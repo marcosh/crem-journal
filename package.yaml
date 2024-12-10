@@ -46,6 +46,7 @@ library:
     - cassava
     - crem
     - monad-time
+    - mtl
     - text
     - time
 

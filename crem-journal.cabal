@@ -48,6 +48,7 @@ library
     , cassava
     , crem
     , monad-time
+    , mtl
     , text
     , time
   default-language: GHC2021

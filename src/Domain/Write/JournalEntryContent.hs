@@ -1,5 +1,5 @@
 module Domain.Write.JournalEntryContent
-  ( JournalEntryContent
+  ( JournalEntryContent (journalEntryContentAsText)
   , JournalEntryContentError (..)
   , journalEntryContent
   ) where
@@ -8,7 +8,7 @@ import "text" Data.Text (Text, null, strip)
 import "base" Prelude hiding (null)
 
 -- | The content of a journal entry. Should be a non-empty string after trimming
-newtype JournalEntryContent = JournalEntryContent Text
+newtype JournalEntryContent = JournalEntryContent {journalEntryContentAsText :: Text}
   deriving stock (Show)
   deriving newtype (Eq)
 
