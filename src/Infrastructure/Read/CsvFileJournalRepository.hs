@@ -10,6 +10,7 @@ import "text" Data.Text (Text)
 import "time" Data.Time (UTCTime)
 import "time" Data.Time.Format.ISO8601 (iso8601ParseM, iso8601Show)
 
+import Domain.Read.JournalRepository (JournalRepository (..))
 import Domain.Write.JournalEntryContent (JournalEntryContent (journalEntryContentAsText))
 import Domain.Write.JournalEntryCreatedAt (JournalEntryCreatedAt (..))
 
@@ -44,8 +45,15 @@ newtype CsvFileJournalRepositoryConfig = CsvFileJournalRepositoryConfig
 -- It is a wrapper over operations in a context `m`
 newtype CsvFileJournalRepository m a = CsvFileJournalRepository (m a)
 
+deriving newtype instance (Functor m) => Functor (CsvFileJournalRepository m)
+
+deriving newtype instance (Applicative m) => Applicative (CsvFileJournalRepository m)
+
 addContentToCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m) => JournalEntryContent -> JournalEntryCreatedAt -> CsvFileJournalRepository m ()
 addContentToCsvFileJournalRepository content createdAt = CsvFileJournalRepository $ do
   let csvRow = JournalCsvRow (journalEntryContentAsText content) (CsvTime $ journalEntryCreatedAtAsUTCTime createdAt)
   config <- ask
   liftIO $ BL.appendFile (csvFilePath config) $ encode [csvRow]
+
+instance (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m) => JournalRepository (CsvFileJournalRepository m) where
+  addContent = addContentToCsvFileJournalRepository
