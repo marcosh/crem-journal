@@ -25,6 +25,7 @@ extra-source-files:
 
 library
   exposed-modules:
+      Domain.Read.JournalEntry
       Domain.Read.JournalProjection
       Domain.Read.JournalRepository
       Domain.Write.JournalAggregate
@@ -51,6 +52,8 @@ library
     , mtl
     , text
     , time
+    , utf8-string
+    , vector
   default-language: GHC2021
 
 executable crem-journal-exe

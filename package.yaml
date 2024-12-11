@@ -49,6 +49,8 @@ library:
     - mtl
     - text
     - time
+    - utf8-string
+    - vector
 
 tests:
   crem-journal-spec:

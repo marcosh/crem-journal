@@ -1,7 +1,9 @@
 module Domain.Read.JournalRepository where
 
-import Domain.Write.JournalEntryContent (JournalEntryContent)
-import Domain.Write.JournalEntryCreatedAt (JournalEntryCreatedAt)
+import "time" Data.Time (Day)
+
+import Domain.Read.JournalEntry
 
 class (Applicative m) => JournalRepository m where
-  addContent :: JournalEntryContent -> JournalEntryCreatedAt -> m ()
+  addContent :: JournalEntry -> m ()
+  getContentsForDay :: Day -> m [JournalEntry]
