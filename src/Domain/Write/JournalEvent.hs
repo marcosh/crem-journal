@@ -1,7 +1,6 @@
 module Domain.Write.JournalEvent where
 
-import Domain.Write.JournalEntryContent (JournalEntryContent)
-import Domain.Write.JournalEntryCreatedAt (JournalEntryCreatedAt)
+import Domain.Write.JournalEntry (JournalEntry)
 
-data JournalEvent
-  = JournalEntryRecorded JournalEntryContent JournalEntryCreatedAt
+newtype JournalEvent
+  = JournalEntryRecorded JournalEntry

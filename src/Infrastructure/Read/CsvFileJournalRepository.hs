@@ -15,8 +15,8 @@ import "time" Data.Time.Format.ISO8601 (iso8601ParseM, iso8601Show)
 import "utf8-string" Data.ByteString.Lazy.UTF8 qualified as BLU
 import "vector" Data.Vector (toList)
 
-import Domain.Read.JournalEntry (JournalEntry (..), wasCreatedOn)
 import Domain.Read.JournalRepository (JournalRepository (..))
+import Domain.Write.JournalEntry (JournalEntry (..), wasCreatedOn)
 import Domain.Write.JournalEntryContent (JournalEntryContent (..), JournalEntryContentError (..), journalEntryContent)
 import Domain.Write.JournalEntryCreatedAt (JournalEntryCreatedAt (..))
 

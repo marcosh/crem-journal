@@ -1,4 +1,4 @@
-module Domain.Read.JournalEntry where
+module Domain.Write.JournalEntry where
 
 import "time" Data.Time (Day, UTCTime (..))
 

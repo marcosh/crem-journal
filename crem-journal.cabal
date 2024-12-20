@@ -25,11 +25,11 @@ extra-source-files:
 
 library
   exposed-modules:
-      Domain.Read.JournalEntry
       Domain.Read.JournalProjection
       Domain.Read.JournalRepository
       Domain.Write.JournalAggregate
       Domain.Write.JournalCommand
+      Domain.Write.JournalEntry
       Domain.Write.JournalEntryContent
       Domain.Write.JournalEntryCreatedAt
       Domain.Write.JournalEvent
