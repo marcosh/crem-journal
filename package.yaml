@@ -50,6 +50,7 @@ library:
     - text
     - time
     - utf8-string
+    - uuid
     - vector
 
 tests:

@@ -27,6 +27,7 @@ library
   exposed-modules:
       Domain.Read.JournalProjection
       Domain.Read.JournalRepository
+      Domain.Write.Id
       Domain.Write.JournalAggregate
       Domain.Write.JournalCommand
       Domain.Write.JournalEntry
@@ -53,6 +54,7 @@ library
     , text
     , time
     , utf8-string
+    , uuid
     , vector
   default-language: GHC2021
 
