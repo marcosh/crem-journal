@@ -7,24 +7,25 @@ import "crem" Crem.BaseMachine (ActionResult (..), BaseMachineT (..), InitialSta
 import "crem" Crem.Topology (TrivialTopology)
 import "monad-time" Control.Monad.Time (MonadTime)
 
+import Domain.Write.Journal (Journal, logEntry)
 import Domain.Write.JournalCommand (JournalCommand (..))
 import Domain.Write.JournalEntry (JournalEntry (..))
 import Domain.Write.JournalEntryCreatedAt (journalCreatedNow)
 import Domain.Write.JournalEvent (JournalEvent (..))
 
 data JournalState (journalVertex :: ()) where
-  JournalMapState :: [JournalEvent] -> JournalState '()
+  JournalMapState :: Journal -> JournalState '()
 
 aggregate :: (MonadTime m) => BaseMachineT m (TrivialTopology @()) JournalCommand JournalEvent
 aggregate =
   BaseMachineT
-    { initialState = InitialState $ JournalMapState []
-    , action = \(JournalMapState events) (RecordJournalEntry content) ->
+    { initialState = InitialState $ JournalMapState mempty
+    , action = \(JournalMapState journal) (RecordJournalEntry content) ->
         ActionResult $ do
           journalEntryCreatedAt <- journalCreatedNow
-          let event = JournalEntryRecorded (JournalEntry content journalEntryCreatedAt)
+          let entry = JournalEntry content journalEntryCreatedAt
           pure
-            ( event
-            , JournalMapState $ event : events
+            ( JournalEntryRecorded entry
+            , JournalMapState $ logEntry entry journal
             )
     }

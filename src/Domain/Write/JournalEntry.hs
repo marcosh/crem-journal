@@ -12,3 +12,6 @@ data JournalEntry = JournalEntry
 
 wasCreatedOn :: JournalEntry -> Day -> Bool
 wasCreatedOn (JournalEntry _ (JournalEntryCreatedAt (UTCTime createdAtDay _))) day = day == createdAtDay
+
+isNewer :: JournalEntry -> JournalEntry -> Ordering
+isNewer (JournalEntry _ createdAt1) (JournalEntry _ createdAt2) = compare createdAt1 createdAt2

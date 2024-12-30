@@ -4,6 +4,7 @@ import "monad-time" Control.Monad.Time (MonadTime (..))
 import "time" Data.Time (UTCTime)
 
 newtype JournalEntryCreatedAt = JournalEntryCreatedAt {journalEntryCreatedAtAsUTCTime :: UTCTime}
+  deriving newtype (Eq, Ord)
 
 journalCreatedNow :: (MonadTime m) => m JournalEntryCreatedAt
 journalCreatedNow = JournalEntryCreatedAt <$> currentTime
