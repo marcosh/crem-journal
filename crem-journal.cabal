@@ -78,9 +78,12 @@ test-suite crem-journal-spec
   other-modules:
       Domain.Write.JournalAggregateSpec
       Domain.Write.JournalEntryContentSpec
+      Domain.Write.JournalEntrySpec
+      Domain.Write.JournalSpec
       Gen.JournalEntryContent
       Gen.UTCTime
       Infrastructure.Read.CsvFileJournalRepositorySpec
+      Test.Helpers
       Paths_crem_journal
   hs-source-dirs:
       spec
