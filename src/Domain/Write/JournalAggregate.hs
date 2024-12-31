@@ -16,10 +16,10 @@ import Domain.Write.JournalEvent (JournalEvent (..))
 data JournalState (journalVertex :: ()) where
   JournalMapState :: Journal -> JournalState '()
 
-aggregate :: (MonadTime m) => BaseMachineT m (TrivialTopology @()) JournalCommand JournalEvent
-aggregate =
+aggregate :: (MonadTime m) => JournalState '() -> BaseMachineT m (TrivialTopology @()) JournalCommand JournalEvent
+aggregate initialState =
   BaseMachineT
-    { initialState = InitialState $ JournalMapState mempty
+    { initialState = InitialState initialState
     , action = \(JournalMapState journal) (RecordJournalEntry content) ->
         ActionResult $ do
           journalEntryCreatedAt <- journalCreatedNow
