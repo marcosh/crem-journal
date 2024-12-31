@@ -35,6 +35,9 @@ library
       Domain.Write.JournalEntryCreatedAt
       Domain.Write.JournalEvent
       Infrastructure.Read.CsvFileJournalRepository
+      Infrastructure.Write.EventStore
+      Infrastructure.Write.EventStream
+      Infrastructure.Write.EventStreamJournalFactory
   other-modules:
       Paths_crem_journal
   hs-source-dirs:

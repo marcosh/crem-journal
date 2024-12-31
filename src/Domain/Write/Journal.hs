@@ -1,11 +1,14 @@
 module Domain.Write.Journal
   ( Journal (entryList)
   , logEntry
+  , fromEntries
+  , applyJournalEvent
   )
 where
 
 import Data.List (sortBy)
 import Domain.Write.JournalEntry (JournalEntry (..), isNewer)
+import Domain.Write.JournalEvent (JournalEvent (..))
 
 -- list of events ordered from the newest to the oldest
 newtype Journal = Journal {entryList :: [JournalEntry]}
@@ -20,3 +23,9 @@ instance Monoid Journal where
 
 logEntry :: JournalEntry -> Journal -> Journal
 logEntry journalEntry (Journal entries) = Journal . sortBy isNewer $ journalEntry : entries
+
+fromEntries :: [JournalEntry] -> Journal
+fromEntries = Journal . sortBy isNewer
+
+applyJournalEvent :: Journal -> JournalEvent -> Journal
+applyJournalEvent journal (JournalEntryRecorded journalEntry) = logEntry journalEntry journal
