@@ -34,6 +34,7 @@ library
       Domain.Write.JournalEntryContent
       Domain.Write.JournalEntryCreatedAt
       Domain.Write.JournalEvent
+      Infrastructure.CsvTime
       Infrastructure.Read.CsvFileJournalRepository
       Infrastructure.Write.EventStore
       Infrastructure.Write.EventStream
