@@ -1,5 +1,8 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Domain.Write.JournalEntry where
 
+import "aeson" Data.Aeson.TH (defaultOptions, deriveJSON)
 import "time" Data.Time (Day, UTCTime (..))
 
 import Domain.Write.JournalEntryContent
@@ -10,6 +13,8 @@ data JournalEntry = JournalEntry
   , createdAt :: JournalEntryCreatedAt
   }
   deriving stock (Eq, Show)
+
+$(deriveJSON defaultOptions ''JournalEntry)
 
 wasCreatedOn :: JournalEntry -> Day -> Bool
 wasCreatedOn (JournalEntry _ (JournalEntryCreatedAt (UTCTime createdAtDay _))) day = day == createdAtDay

@@ -15,8 +15,9 @@ import "vector" Data.Vector (toList)
 
 import Domain.Read.JournalRepository (JournalRepository (..))
 import Domain.Write.JournalEntry (JournalEntry (..), wasCreatedOn)
-import Domain.Write.JournalEntryContent (JournalEntryContent (..), JournalEntryContentError (..), journalEntryContent)
+import Domain.Write.JournalEntryContent (JournalEntryContent (..), JournalEntryContentError, journalEntryContent)
 import Domain.Write.JournalEntryCreatedAt (JournalEntryCreatedAt (..))
+import Infrastructure.CsvFileError (CsvFileError (..))
 import Infrastructure.CsvTime (CsvTime (..))
 
 data CsvRow = JournalCsvRow
@@ -46,14 +47,10 @@ addContentToCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRe
 addContentToCsvFileJournalRepository (JournalEntry content createdAt) = CsvFileJournalRepository $ do
   let csvRow = JournalCsvRow (journalEntryContentAsText content) (CsvTime $ journalEntryCreatedAtAsUTCTime createdAt)
   config <- ask
-  liftIO $ BL.appendFile (csvFilePath config) $ encode [csvRow] -- TODO: handle file related exceptionss
-
-data CsvFileError
-  = UnableToParseCsvFile String
-  | CsvContentError JournalEntryContentError
+  liftIO $ BL.appendFile (csvFilePath config) $ encode [csvRow] -- TODO: handle file related exceptions
 
 -- | Retrieve all content from CSV file
-getContentsFromCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError CsvFileError m) => CsvFileJournalRepository m [JournalEntry]
+getContentsFromCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError (CsvFileError JournalEntryContentError) m) => CsvFileJournalRepository m [JournalEntry]
 getContentsFromCsvFileJournalRepository = CsvFileJournalRepository $ do
   config <- ask
   fileContent <- liftIO $ readFile (csvFilePath config) -- TODO: handle file related exceptions
@@ -63,10 +60,10 @@ getContentsFromCsvFileJournalRepository = CsvFileJournalRepository $ do
     pure $ JournalEntry journalContent (JournalEntryCreatedAt createdAt)
 
 -- | Retrieve content from CSV file and then filter only content for the specified day
-getContentsForDayFromCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError CsvFileError m) => Day -> CsvFileJournalRepository m [JournalEntry]
+getContentsForDayFromCsvFileJournalRepository :: (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError (CsvFileError JournalEntryContentError) m) => Day -> CsvFileJournalRepository m [JournalEntry]
 getContentsForDayFromCsvFileJournalRepository day =
   filter (`wasCreatedOn` day) <$> getContentsFromCsvFileJournalRepository
 
-instance (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError CsvFileError m) => JournalRepository (CsvFileJournalRepository m) where
+instance (MonadIO m, MonadReader CsvFileJournalRepositoryConfig m, MonadError (CsvFileError JournalEntryContentError) m) => JournalRepository (CsvFileJournalRepository m) where
   addContent = addContentToCsvFileJournalRepository
   getContentsForDay = getContentsForDayFromCsvFileJournalRepository

@@ -6,7 +6,7 @@ import "hedgehog" Hedgehog (forAll)
 import "hspec" Test.Hspec (Spec, describe, it, shouldBe)
 import "hspec-hedgehog" Test.Hspec.Hedgehog (hedgehog)
 
-import "crem-journal" Infrastructure.Read.CsvFileJournalRepository (CsvTime (..))
+import "crem-journal" Infrastructure.CsvTime (CsvTime (..))
 
 import Gen.UTCTime (genUTCTime)
 

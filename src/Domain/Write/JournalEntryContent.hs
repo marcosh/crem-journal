@@ -1,9 +1,12 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Domain.Write.JournalEntryContent
   ( JournalEntryContent (journalEntryContentAsText)
   , JournalEntryContentError (..)
   , journalEntryContent
   ) where
 
+import "aeson" Data.Aeson.TH (defaultOptions, deriveJSON)
 import "text" Data.Text (Text, null, strip)
 import "base" Prelude hiding (null)
 
@@ -11,6 +14,8 @@ import "base" Prelude hiding (null)
 newtype JournalEntryContent = JournalEntryContent {journalEntryContentAsText :: Text}
   deriving stock (Show)
   deriving newtype (Eq)
+
+$(deriveJSON defaultOptions ''JournalEntryContent)
 
 -- | Ways in which a text can fail to become a journal entry content
 data JournalEntryContentError
