@@ -39,6 +39,7 @@ library
       Infrastructure.Read.CsvFileJournalRepository
       Infrastructure.Write.CsvFileEventStore
       Infrastructure.Write.EventStore
+      Infrastructure.Write.EventStorePayload
       Infrastructure.Write.EventStream
       Infrastructure.Write.EventStreamJournalFactory
   other-modules:

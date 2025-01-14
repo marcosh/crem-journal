@@ -1,14 +1,12 @@
 module Infrastructure.Write.CsvFileEventStore where
 
-import "aeson" Data.Aeson (Result (..), ToJSON (toJSON), Value, fromJSON)
+import "aeson" Data.Aeson (Result (..), ToJSON (toJSON), fromJSON)
 import "base" Control.Arrow (left)
 import "base" Control.Monad.IO.Class (MonadIO (..))
 import "base" Data.Traversable (for)
 import "base" GHC.Generics (Generic)
-import "base" Text.Read (readMaybe)
-import "bytestring" Data.ByteString.Char8 (pack, unpack)
 import "bytestring" Data.ByteString.Lazy qualified as BL
-import "cassava" Data.Csv (Field, FromField (..), FromRecord, HasHeader (..), Parser, ToField (..), ToRecord, decode, encode)
+import "cassava" Data.Csv (FromRecord, HasHeader (..), ToRecord, decode, encode)
 import "mtl" Control.Monad.Except (MonadError (..), liftEither)
 import "mtl" Control.Monad.Reader (MonadReader (..))
 import "utf8-string" Data.ByteString.Lazy.UTF8 qualified as BLU
@@ -20,23 +18,8 @@ import Domain.Write.JournalEvent (JournalEvent (..), JournalEventTag (..), journ
 import Infrastructure.CsvFileError (CsvFileError (..))
 import Infrastructure.CsvTime (CsvTime (CsvTime))
 import Infrastructure.Write.EventStore (EventStore (..))
+import Infrastructure.Write.EventStorePayload (EventStorePayload (..), EventStorePayloadError (..))
 import Infrastructure.Write.EventStream (EventStream, fromEventList)
-
-newtype EventStorePayload = EventStorePayload Value
-  deriving stock (Show)
-
-newtype EventStorePayloadError
-  = ImpossibleToParseJSONValue String
-
-instance FromField EventStorePayload where
-  parseField :: Field -> Parser EventStorePayload
-  parseField field = case readMaybe $ unpack field of
-    Nothing -> fail "payload does not contain JSON value"
-    Just value -> pure $ EventStorePayload value
-
-instance ToField EventStorePayload where
-  toField :: EventStorePayload -> Field
-  toField (EventStorePayload value) = pack $ show value
 
 data EventStoreCsvRow = EventStoreCsvRow
   { tag :: JournalEventTag
